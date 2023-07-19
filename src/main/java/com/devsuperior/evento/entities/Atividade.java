@@ -3,8 +3,10 @@ package com.devsuperior.evento.entities;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_atividade")
@@ -23,6 +25,9 @@ public class Atividade {
 
     @OneToMany(mappedBy = "atividade")
     private List<Bloco> blocos;
+
+    @ManyToMany(mappedBy = "atividades")
+    private Set<Participante> participantes = new HashSet<>();
 
     public Atividade() {}
 
@@ -76,6 +81,10 @@ public class Atividade {
 
     public List<Bloco> getBlocos() {
         return blocos;
+    }
+
+    public Set<Participante> getParticipantes() {
+        return participantes;
     }
 
     @Override
